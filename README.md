@@ -1,26 +1,48 @@
-﻿# Chatbot RAG PDF
+﻿# DocMind AI - Intelligent Multi-PDF RAG System
 
-Aplicacion React + Vite para consultar documentos PDF con un chatbot RAG.
+DocMind AI is a professional-grade RAG (Retrieval-Augmented Generation) ecosystem that turns any PDF URL into a conversational knowledge base in seconds.
 
-## Stack
-- React + TypeScript + Vite
-- Tailwind CSS
-- Framer Motion
-- Supabase Auth
-- Cloudflare Turnstile CAPTCHA
-- Endpoint seguro en `/api/chat` para Vercel
+**Live Demo:** `https://ai-agent-rag-pdf.vercel.app/`
 
-## Seguridad
-- El frontend no llama directo al webhook de n8n en produccion.
-- `/api/chat` valida sesion, aplica rate limiting y reenvia la peticion al webhook.
-- `/api/verify-captcha` valida Turnstile antes de autenticar.
-- Registro publico deshabilitado (solo usuarios autorizados).
-- No subas `.env` al repositorio.
+## Key Features
+- Dynamic ingestion: paste a PDF URL and the system downloads, chunks, and vectorizes content automatically.
+- Context isolation: metadata filtering ensures responses are grounded on the selected document.
+- Conversational memory: MongoDB-backed memory keeps conversation continuity.
+- Clean architecture: decoupled backend (n8n on Ubuntu/Docker) and frontend (React on Vercel).
+- Resilient workflows: hardened JS node logic to prevent malformed-input failures.
 
-## Variables de entorno
-Crea `.env` local usando `.env.example`.
+## Technical Stack
+- Workflows: n8n
+- Frontend: React + TypeScript + Vite + Tailwind + Framer Motion
+- Auth & protection: Supabase Auth + Cloudflare Turnstile
+- AI models: GPT-4o-mini / Claude Sonnet via OpenRouter
+- Vector DB: Qdrant
+- Embeddings: `text-embedding-3-small`
+- Memory DB: MongoDB Atlas
+- Runtime: Ubuntu 24.04 + Docker
 
-### Frontend (publicas)
+## Architecture
+1. Ingestion loop: fetch PDF binary, extract text/metadata, normalize and split into chunks.
+2. Vectorization: embed chunks and store vectors with `source_url` metadata in Qdrant.
+3. Retrieval: AI agent queries Qdrant with strict metadata filters.
+4. Response: structured Markdown output with source-aware context.
+
+## Frontend Security Model
+- Protected route for chatbot usage (`/chat`).
+- CAPTCHA verification before login (`/api/verify-captcha`).
+- Server-side chat proxy (`/api/chat`) with auth validation and rate limiting.
+- No secret exposure in client bundle.
+
+## Run Locally
+```bash
+npm install
+npm run dev
+```
+
+## Environment Variables
+Use `.env.example` as template.
+
+### Frontend
 - `VITE_CHAT_API_URL`
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_ANON_KEY`
@@ -32,21 +54,17 @@ Crea `.env` local usando `.env.example`.
 - `SUPABASE_ANON_KEY`
 - `TURNSTILE_SECRET_KEY`
 
-## Desarrollo
-```bash
-npm install
-npm run dev
-```
+## Deployment
+- Platform: Vercel
+- Build command: `npm run build`
+- Output: `dist`
 
-## Build
-```bash
-npm run build
-npm run preview
-```
+## Testing Status
+- Multi-URL support
+- Metadata extraction
+- Source-grounded responses
+- Automatic document indexing
+- Protected login flow and anti-bot checks
 
-## Flujo de acceso
-1. Usuario entra a landing (`/`).
-2. Inicia sesion en `/login`.
-3. CAPTCHA se valida en backend.
-4. Ruta `/chat` queda protegida por sesion.
-5. Mensajes pasan por `/api/chat` antes de llegar a n8n.
+## Project Context
+Developed for the Metabiblioteca Alfresco technical challenge.

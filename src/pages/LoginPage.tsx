@@ -22,6 +22,8 @@ export default function LoginPage() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined
+  const resolvedTurnstileSiteKey =
+    turnstileSiteKey || (import.meta.env.DEV ? '1x00000000000000000000AA' : undefined)
 
   if (session) return <Navigate to={redirectTo} replace />
 
@@ -88,13 +90,16 @@ export default function LoginPage() {
         />
 
         <div className="mt-5">
-          {turnstileSiteKey ? (
+          {resolvedTurnstileSiteKey ? (
             <Turnstile
-              siteKey={turnstileSiteKey}
+              siteKey={resolvedTurnstileSiteKey}
               options={{ theme: 'dark' }}
               onSuccess={(token) => setCaptchaToken(token)}
               onExpire={() => setCaptchaToken(null)}
-              onError={() => setCaptchaToken(null)}
+              onError={(code) => {
+                setCaptchaToken(null)
+                setError(`Captcha error: ${code}. Verifica dominio autorizado y claves.`)
+              }}
             />
           ) : (
             <p className="rounded-lg bg-amber-500/15 px-3 py-2 text-sm text-amber-100">
@@ -105,7 +110,7 @@ export default function LoginPage() {
 
         <button
           type="submit"
-          disabled={loading || !turnstileSiteKey}
+          disabled={loading || !resolvedTurnstileSiteKey}
           className="mt-6 w-full rounded-xl bg-electric-500 px-4 py-2.5 font-semibold text-white transition hover:bg-electric-400 disabled:opacity-60"
         >
           {loading ? 'Procesando...' : 'Entrar'}
