@@ -3,6 +3,7 @@ import axios from 'axios'
 import { nanoid } from 'nanoid'
 
 import type { ChatMessageItem } from '../types/chat'
+import { supabase } from '../services/supabase'
 
 type UseChatOptions = {
   initialMessages?: ChatMessageItem[]
@@ -59,8 +60,11 @@ export default function useChat(options: UseChatOptions = {}): UseChatResult {
   const currentPdfUrlRef = useRef('')
   const processingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const webhookUrl = useMemo(
-    () => import.meta.env.VITE_N8N_WEBHOOK_URL as string | undefined,
+  const apiUrl = useMemo(
+    () =>
+      (import.meta.env.VITE_CHAT_API_URL as string | undefined) ??
+      (import.meta.env.VITE_N8N_WEBHOOK_URL as string | undefined) ??
+      '/api/chat',
     []
   )
 
@@ -109,7 +113,7 @@ export default function useChat(options: UseChatOptions = {}): UseChatResult {
   const sendMessage = useCallback(
     async (message: string, pdfUrl?: string) => {
       const trimmedMessage = message.trim()
-      if (!trimmedMessage || !webhookUrl) return false
+      if (!trimmedMessage || !apiUrl) return false
 
       const resolvedPdfUrl = (pdfUrl ?? currentPdfUrlRef.current).trim()
 
@@ -125,11 +129,29 @@ export default function useChat(options: UseChatOptions = {}): UseChatResult {
       setMessages((prev) => [...prev, userMessage])
 
       try {
-        const response = await axios.post(webhookUrl, {
-          chatInput: trimmedMessage,
-          pdf_url: resolvedPdfUrl,
-          sessionId: sessionIdRef.current,
-        })
+        const {
+          data: { session },
+        } = await supabase.auth.getSession()
+        const token = session?.access_token
+
+        if (!token) {
+          setError('Tu sesion expiro. Vuelve a iniciar sesion.')
+          return false
+        }
+
+        const response = await axios.post(
+          apiUrl,
+          {
+            chatInput: trimmedMessage,
+            pdf_url: resolvedPdfUrl,
+            sessionId: sessionIdRef.current,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
 
         const botText = extractBotMessage(response.data)
 
@@ -147,7 +169,7 @@ export default function useChat(options: UseChatOptions = {}): UseChatResult {
         }
         return true
       } catch {
-        setError('No se pudo conectar con el webhook. Revisa la URL o tu red.')
+        setError('No se pudo procesar la consulta. Revisa tu conexion o intenta de nuevo.')
         setMessages((prev) => [
           ...prev,
           {
@@ -161,7 +183,7 @@ export default function useChat(options: UseChatOptions = {}): UseChatResult {
         setIsLoading(false)
       }
     },
-    [clearError, startProcessing, webhookUrl]
+    [apiUrl, clearError, startProcessing]
   )
 
   return {
