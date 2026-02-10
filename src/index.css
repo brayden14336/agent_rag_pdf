@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Space Grotesk", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: radial-gradient(circle at top, rgba(58, 99, 255, 0.18), transparent 45%),
+      linear-gradient(180deg, #0f1115 0%, #141824 45%, #0f1115 100%);
+    color: #e6e9f2;
+  }
+}
